@@ -1,0 +1,50 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/* styles.css */
+ /* .dark  {
+  
+  background-color: #1a202c;
+  color: #e2e8f0;
+}  */
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+
+}
+
+a{
+  text-decoration: none;
+  color: #5a5a5a;
+}
+
+img{
+  cursor: pointer;
+
+}
+
+.flex-div{
+  display: flex;
+  align-items: center;
+  
+}
+@media (max-width:426px){
+  .card{
+    width: 500px;
+
+  }
+  .sidebar{
+    display: none;
+  }
+  .search-box{
+    width:50vw
+  }
+  .nav-left .logo{
+    width:100px
+  }
+
+}
