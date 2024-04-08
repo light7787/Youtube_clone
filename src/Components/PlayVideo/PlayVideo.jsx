@@ -31,7 +31,7 @@ const PlayVideo = () => {
 
     const handleSubscribeClick = () => {
         setSubscribed(!subscribed);
-        SubscriberList(channelData.snippet.thumbnails.default.url);
+       
     };
    
 
@@ -69,16 +69,7 @@ const PlayVideo = () => {
     useEffect(()=>{
         fetchOtherData();
     },[apiData])
-    useEffect(() => {
-        const userData = {
-            name: channelData.snippet.title,
-            img:channelData.snippet.thumbnails.default.url,
-            user:userEmail
-           
-           
-          };
-        console.log(channelData);
-    }, [channelData]);
+   
    
 
 
