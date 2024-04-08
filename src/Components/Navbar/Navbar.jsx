@@ -9,10 +9,9 @@ import notification_icon from "../../assets/notification.png";
 import profile_icon from "../../assets/jack.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Store/Store";
-import axios from 'axios';
 import { API_KEY3 } from "../../Data";
 import { useNavigate } from "react-router-dom";
- import YouTubeIcon from '@mui/icons-material/YouTube';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 const Navbar = ({ setSidebar }) => {
   const navigate = useNavigate();
@@ -22,19 +21,16 @@ const Navbar = ({ setSidebar }) => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(
-        'https://www.googleapis.com/youtube/v3/search',
-        {
-          params: {
-            q: query,
-            part: 'snippet',
-            maxResults: 30,
-            key: API_KEY3,
-          },
-        }
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?q=${query}&part=snippet&maxResults=30&key=${API_KEY3}`
       );
 
-      setVideos(response.data.items);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      setVideos(data.items);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -64,11 +60,9 @@ const Navbar = ({ setSidebar }) => {
         />
         <Link to={"/"}>
           <span className="content ">
-        <YouTubeIcon fontSize="large" />
-        <span className="youtube ">YouTube</span>
-        </span>
-
-       
+            <YouTubeIcon fontSize="large" />
+            <span className="youtube ">YouTube</span>
+          </span>
         </Link>
       </div>
 
@@ -92,7 +86,8 @@ const Navbar = ({ setSidebar }) => {
           <div className="flex items-center">
             <img className="user-icon w-8 h-8 rounded-full" src={profile_icon} alt="" />
             <h2 className="text-white ml-2">{userdata}</h2>
-          </div></Link>
+          </div>
+        </Link>
       </div>
     </nav>
   );
